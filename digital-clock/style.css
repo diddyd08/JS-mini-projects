@@ -1,0 +1,18 @@
+body {
+    font-family: "Bitcount Prop Single", system-ui;;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0px;
+    background-color: black;
+}
+
+.digital-clock {
+    font-size: 32px;
+    color: white;
+    text-align: center;
+    padding: 52px;
+    border: 1px solid white;
+    border-radius: 12px;
+}
