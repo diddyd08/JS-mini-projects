@@ -1,33 +1,38 @@
-const numberList = [];
+const LOTTO_SIZE = 6;
+const LOTTO_MAX = 45;
 const colors = ["orange", "skyblue", "red", "purple", "green"];
 
+const numbersContainer = document.querySelector(".numbers");
 const drawBtn = document.querySelector(".buttons__draw-btn");
 const resetBtn = document.querySelector(".buttons__reset-btn");
 
-const display = function (numberList) {
-  const numbers = document.querySelector(".numbers");
-  numberList.forEach((number) => {
+const display = function (numbers, container) {
+  numbers.forEach((number) => {
     const numberElement = document.createElement("span");
     numberElement.textContent = number;
     numberElement.style.backgroundColor = colors[Math.floor(number / 10)];
-    numbers.appendChild(numberElement);
+    container.appendChild(numberElement);
   });
 };
 
-drawBtn.addEventListener("click", () => {
-  if (numberList.length === 0) {
-    while (numberList.length < 6) {
-      let randomNumber = Math.floor(Math.random() * 44 + 1);
-      if (numberList.indexOf(randomNumber) === -1) {
-        numberList.push(randomNumber);
-      }
+const generateRandomNumbers = function (size, max) {
+  const randomNumbers = [];
+  while (randomNumbers.length < size) {
+    const randomNumber = Math.floor(Math.random() * max) + 1;
+    if (randomNumbers.indexOf(randomNumber) === -1) {
+      randomNumbers.push(randomNumber);
     }
-    display(numberList);
+  }
+  return randomNumbers;
+};
+
+drawBtn.addEventListener("click", () => {
+  if (numbersContainer.children.length === 0) {
+    const newRandomNumbers = generateRandomNumbers(LOTTO_SIZE, LOTTO_MAX);
+    display(newRandomNumbers, numbersContainer);
   }
 });
 
 resetBtn.addEventListener("click", () => {
-  numberList.splice(0, 6);
-  const numbers = document.querySelector(".numbers");
-  numbers.innerHTML = "";
+  numbersContainer.innerHTML = "";
 });
