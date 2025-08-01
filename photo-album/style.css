@@ -1,0 +1,66 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.album-screen {
+  width: 600px;
+  height: 400px;
+  position: relative;
+}
+
+.album-screen__photo {
+  width: 100%;
+  height: 360px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.album-screen__buttons {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.album-screen__button {
+  width: 50%;
+  height: 40px;
+  background-color: #10113c;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.album-screen__button:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.album-screen__button:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+.screen-cover {
+  width: 600px;
+  height: 400px;
+  background-color: #375582;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.screen-cover__remove-button {
+  background-color: #10113c;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  width: 264px;
+  height: 52px;
+  margin-bottom: 36px;
+  border-radius: 12px;
+  cursor: pointer;
+}
