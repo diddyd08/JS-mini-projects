@@ -3,23 +3,21 @@ const toDoUl = document.querySelector(".todo-list");
 const toDoForm = document.getElementById("add-todo");
 const toDoInput = document.querySelector(".add-todo__input");
 
-const deleteToDo = function(deletingToDo) {
-  toDoList = toDoList.filter((toDo, index) => {
-    return toDo != deletingToDo;
-  });
-  localStorage.setItem("toDoList", JSON.stringify(toDoList));
-  displayToDoList();
-}
+const loadToDoList = function() {
+  const savedToDoList = localStorage.getItem("toDoList");
+  toDoList = savedToDoList? JSON.parse(savedToDoList) : [];
+};
 
 const displayToDoList = function () {
   toDoUl.innerHTML = "";
-  toDoList = JSON.parse(localStorage.getItem("toDoList")) || [];
   toDoList.forEach((toDo) => {
     const listElement = document.createElement("li");
-    listElement.textContent = toDo;
+    listElement.textContent = toDo.toDoText;
+    listElement.title = "클릭 시 완료"
     
     const deleteBtn = document.createElement("span");
     deleteBtn.textContent = "X";
+    deleteBtn.title = "클릭 시 삭제"
 
     deleteBtn.addEventListener("click", () => {
       deleteToDo(toDo);
@@ -35,12 +33,24 @@ const displayToDoList = function () {
   });
 };
 
+function deleteToDo (deletingToDo) {
+  toDoList = toDoList.filter((toDo, index) => {
+    return toDo.toDoId != deletingToDo.toDoId;
+  });
+  localStorage.setItem("toDoList", JSON.stringify(toDoList));
+  displayToDoList();
+}
+
 toDoForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  toDoList.push(toDoInput.value);
+  toDoList.push({
+    toDoText: toDoInput.value,
+    toDoId: new Date().getTime()
+  });
   localStorage.setItem("toDoList", JSON.stringify(toDoList));
   displayToDoList();
   toDoInput.value = "";
 });
 
+loadToDoList();
 displayToDoList();
