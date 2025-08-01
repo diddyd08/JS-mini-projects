@@ -7,18 +7,15 @@ const nextBtn = document.querySelector(".album-screen__button:last-child");
 const url = "https://dog.ceo/api/breeds/image/random";
 const request = new XMLHttpRequest();
 const photos = [];
-let photosCount = 0;
 let currentPhotoIndex = 0;
 const maxAlbumLength = 10;
 
 request.addEventListener("load", () => {
-    console.log("image loaded successfully");
+  console.log("image loaded successfully");
   const parsedJson = JSON.parse(request.responseText);
   const imageSrc = parsedJson.message;
   photos.push(imageSrc);
-  photosCount += 1;
-  photoDiv.style.backgroundImage = `url(${imageSrc})`;
-  photoDiv.style.backgroundSize = "contain";
+  updatePhoto(imageSrc);
 });
 
 coverRemoveBtn.addEventListener("click", () => {
@@ -30,25 +27,28 @@ coverRemoveBtn.addEventListener("click", () => {
 prevBtn.addEventListener("click", () => {
   if (currentPhotoIndex > 0) {
     currentPhotoIndex -= 1;
-    photoDiv.style.backgroundImage = `url(${photos[currentPhotoIndex]})`;
-    photoDiv.style.backgroundSize = "contain";
+    updatePhoto(photos[currentPhotoIndex]);
   } else {
     alert("이전 사진이 없습니다.");
   }
 });
 
 nextBtn.addEventListener("click", () => {
-  if (currentPhotoIndex + 1 < photosCount) {
+  if (currentPhotoIndex + 1 < photos.length) {
     currentPhotoIndex += 1;
-    photoDiv.style.backgroundImage = `url(${photos[currentPhotoIndex]})`;
-    photoDiv.style.backgroundSize = "contain";
+    updatePhoto(photos[currentPhotoIndex]);
   } else {
-    if (photosCount + 1 > maxAlbumLength) {
-        alert("최대 저장할 수 있는 사진의 개수를 초과했습니다.");
-        return;
+    if (photos.length + 1 > maxAlbumLength) {
+      alert("최대 저장할 수 있는 사진의 개수를 초과했습니다.");
+      return;
     }
     request.open("GET", url);
     request.send();
     currentPhotoIndex += 1;
   }
 });
+
+function updatePhoto(imagePath) {
+  photoDiv.style.backgroundImage = `url(${imagePath})`;
+  photoDiv.style.backgroundSize = "contain";
+}
