@@ -1,0 +1,82 @@
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-screen {
+  width: 320px;
+  height: 568px;
+  background-color: #abc1d1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 16px;
+  position: relative;
+}
+
+.todo-list li {
+  cursor: pointer;
+  margin-bottom: 12px;
+  list-style-type: none;
+  width: 200px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0px 8px;
+  border-radius: 8px;
+  position: relative;
+  left: 8px;
+  font-size: 14px;
+}
+
+.todo-list li > span {
+  background-color: #dee2e6;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  position: absolute;
+  left: -20px;
+  top: 22px;
+}
+
+#add-todo {
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  width: 100%;
+  display: flex;
+}
+
+.add-todo__input {
+  height: 44px;
+  flex: 1;
+  border: none;
+}
+
+.add-todo__input:focus {
+  outline: none;
+}
+
+.add-todo__submit-button {
+  cursor: pointer;
+  padding: 0px 24px;
+  background-color: #f7e600;
+  border: none;
+  border-radius: 6px;
+}
+
+.todo-list__todo--unfinished {
+  background-color: #f7e600;
+}
+
+.todo-list__todo--finished {
+  background-color: #dee2e6;
+}
